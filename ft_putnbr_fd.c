@@ -1,39 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mida-sil <mida-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/11 14:15:08 by mida-sil          #+#    #+#             */
-/*   Updated: 2024/10/21 11:20:23 by mida-sil         ###   ########.fr       */
+/*   Created: 2024/10/22 14:12:48 by mida-sil          #+#    #+#             */
+/*   Updated: 2024/10/22 14:44:41 by mida-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strdup(const char *src)
+void	ft_putnbr_fd(int n, int fd)
 {
-	char	*cpy;
-	int		len;
-	int		i;
-
-	len = 0;
-	i = 0;
-	while (src[len])
+	if (n == -2147483648)
 	{
-		len++;
+		ft_putchar_fd('-', fd);
+		ft_putchar_fd('2', fd);
+		n = 147483648;
 	}
-	cpy = (char *)malloc((len + 1) * sizeof(char));
-	if (cpy == NULL)
+	else if (n < 0)
 	{
-		return (NULL);
+		ft_putchar_fd('-', fd);
+		n = -n;
 	}
-	while (i < len)
-	{
-		cpy[i] = src[i];
-		i++;
-	}
-	cpy[len] = '\0';
-	return (cpy);
+	if (n > 9)
+		ft_putnbr_fd(n / 10, fd);
+	write(fd, &"0123456789"[n % 10], 1);
 }

@@ -1,39 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mida-sil <mida-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/11 14:15:08 by mida-sil          #+#    #+#             */
-/*   Updated: 2024/10/21 11:20:23 by mida-sil         ###   ########.fr       */
+/*   Created: 2024/10/22 09:06:53 by mida-sil          #+#    #+#             */
+/*   Updated: 2024/10/23 12:02:29 by mida-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strdup(const char *src)
+char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
-	char	*cpy;
-	int		len;
-	int		i;
+	char	*str;
+	size_t	s_len;
+	size_t	sub_len;
 
-	len = 0;
-	i = 0;
-	while (src[len])
-	{
-		len++;
-	}
-	cpy = (char *)malloc((len + 1) * sizeof(char));
-	if (cpy == NULL)
-	{
+	s_len = ft_strlen(s);
+	if (start >= s_len)
+		return (ft_strdup(""));
+	sub_len = s_len - start;
+	if (sub_len > len)
+		sub_len = len;
+	str = (char *)malloc(sizeof(char) * (sub_len + 1));
+	if (str == NULL)
 		return (NULL);
-	}
-	while (i < len)
-	{
-		cpy[i] = src[i];
-		i++;
-	}
-	cpy[len] = '\0';
-	return (cpy);
+	ft_strlcpy(str, &s[start], sub_len + 1);
+	return (str);
 }

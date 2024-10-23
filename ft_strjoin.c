@@ -1,39 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mida-sil <mida-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/11 14:15:08 by mida-sil          #+#    #+#             */
-/*   Updated: 2024/10/21 11:20:23 by mida-sil         ###   ########.fr       */
+/*   Created: 2024/10/22 10:32:49 by mida-sil          #+#    #+#             */
+/*   Updated: 2024/10/23 12:01:19 by mida-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strdup(const char *src)
+char	*ft_strjoin(char const *s1, char const *s2)
 {
-	char	*cpy;
-	int		len;
+	char	*str;
 	int		i;
+	int		j;
 
-	len = 0;
-	i = 0;
-	while (src[len])
-	{
-		len++;
-	}
-	cpy = (char *)malloc((len + 1) * sizeof(char));
-	if (cpy == NULL)
-	{
+	str = (char *)malloc(sizeof(char)
+			* (ft_strlen(s1) + ft_strlen(s2) + 1));
+	if (str == NULL)
 		return (NULL);
-	}
-	while (i < len)
+	i = 0;
+	j = 0;
+	while (s1[i] != '\0')
 	{
-		cpy[i] = src[i];
+		str[i] = s1[i];
 		i++;
 	}
-	cpy[len] = '\0';
-	return (cpy);
-}
+	while (s2[j] != '\0')
+	{
+		str[i] = s2[j];
+		i++;
+		j++;
+	}
+	str[i] = '\0';
+	return (str);
+}	
